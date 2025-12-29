@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎓 Course Aggregator API - Excel Edition
 
 ## Overview
@@ -257,3 +258,9 @@ MIT License - Free for educational use
 ---
 
 **Made with ❤️ for students building course recommendation systems**
+=======
+# EduHunt
+>>>>>>> 9820d892aa91d161a7fb212244ace9f0d31b6a48
+
+## ?? Project Status
+Active development. Data scraping modules are fully operational.
