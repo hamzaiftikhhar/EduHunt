@@ -1,0 +1,40 @@
+{
+  "name": "course-aggregator-excel",
+  "version": "2.0.0",
+  "description": "Course aggregator using real APIs and Excel storage - Lightweight version",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "scrape": "node src/scrapers/runAllScrapers.js",
+    "scrape:youtube": "node src/scrapers/youtubeApiScraper.js",
+    "scrape:microsoft": "node src/scrapers/microsoftLearnScraper.js",
+    "scrape:freecodecamp": "node src/scrapers/freeCodeCampApiScraper.js",
+    "scrape:classcentral": "node src/scrapers/classCentralScraper.js",
+    "scrape:mit": "node src/scrapers/mitOcwScraper.js",
+    "scrape:real": "node src/scrapers/realProvidersScraper.js",
+    "scrape:import": "node src/scrapers/datasetImporter.js",
+    "import:local": "node src/scrapers/localImporter.js"
+  },
+  "keywords": [
+    "courses",
+    "api",
+    "education",
+    "excel",
+    "scraping"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "exceljs": "^4.4.0",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "compression": "^1.7.4",
+    "googleapis": "^128.0.0"
+  }
+}
