@@ -1,38 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Search, Filter, Loader } from "lucide-react";
-
-interface Course {
-  id: string;
-  title: string;
-  platform: string;
-  level: string;
-  description: string;
-  url?: string;
-  rating?: number;
-}
+import { useCourses } from "@/hooks";
+import { CourseCard, Alert } from "@/components";
 
 export default function ExplorePage() {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [platform, setPlatform] = useState("");
+  const [page, setPage] = useState(1);
+
+  const { data, loading, error, refetch } = useCourses({
+    search: searchQuery,
+    platform,
+    page,
+    limit: 12,
+  });
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      // TODO: Implement API call to backend
-      console.log("Search:", searchQuery, "Platform:", platform);
-      // const response = await fetchCourses({ search: searchQuery, platform });
-      // setCourses(response.data || []);
-    } catch (error) {
-      console.error("Search failed:", error);
-    } finally {
-      setLoading(false);
-    }
+    setPage(1);
+    await refetch();
   };
 
   return (
@@ -92,31 +81,41 @@ export default function ExplorePage() {
       {/* Results Section */}
       <section className="py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {error && (
+            <div className="mb-6">
+              <Alert variant="error" title="Error loading courses">
+                {error.message}
+              </Alert>
+            </div>
+          )}
+
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader className="h-8 w-8 animate-spin text-primary-600" />
             </div>
-          ) : courses.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {courses.map((course) => (
-                <Link key={course.id} href={`/course/${course.id}`}>
-                  <div className="h-full rounded-lg border border-slate-200 p-6 transition-all hover:shadow-lg hover:border-primary-300">
-                    <h3 className="mb-2 font-bold text-slate-900">{course.title}</h3>
-                    <p className="mb-3 text-sm text-slate-600">{course.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-700">
-                        {course.platform}
-                      </span>
-                      {course.rating && (
-                        <span className="text-sm font-medium text-yellow-600">
-                          ⭐ {course.rating}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+          ) : data?.courses && data.courses.length > 0 ? (
+            <>
+              <div className="mb-6">
+                <p className="text-sm text-slate-600">
+                  Found {data.total || 0} courses
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {data.courses.map((course: any) => (
+                  <CourseCard
+                    key={course.id}
+                    id={course.id}
+                    title={course.title}
+                    platform={course.platform}
+                    description={course.description}
+                    rating={course.rating}
+                    level={course.level}
+                    price={course.price}
+                    instructor={course.instructor}
+                  />
+                ))}
+              </div>
+            </>
           ) : (
             <div className="rounded-lg border border-slate-200 bg-white p-12 text-center">
               <p className="text-lg text-slate-600">
