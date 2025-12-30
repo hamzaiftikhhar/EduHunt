@@ -1,6 +1,6 @@
 # EduHunt Frontend
 
-A premium, modern frontend for the EduHunt course discovery platform built with Next.js, TypeScript, Tailwind CSS, and Radix UI components.
+A premium, modern frontend for the EduHunt course discovery platform built with Next.js, TypeScript, Tailwind CSS, and NextAuth.js.
 
 ## 🚀 Quick Start
 
@@ -8,6 +8,7 @@ A premium, modern frontend for the EduHunt course discovery platform built with 
 
 - Node.js 18+ and npm/yarn
 - An active EduHunt backend API running
+- OAuth credentials (Google & GitHub)
 
 ### Setup
 
@@ -16,8 +17,6 @@ A premium, modern frontend for the EduHunt course discovery platform built with 
 ```bash
 cd frontend
 npm install
-# or
-yarn install
 ```
 
 2. **Create environment variables:**
@@ -26,18 +25,27 @@ yarn install
 cp .env.example .env.local
 ```
 
-Update `.env.local` with your backend API URL:
+Update `.env.local` with your credentials:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
+
+# OAuth (Google)
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+# OAuth (GitHub)
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+
+# NextAuth Secret
+NEXTAUTH_SECRET=$(openssl rand -base64 32)
 ```
 
 3. **Start the development server:**
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -47,141 +55,265 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
 frontend/
 ├── src/
-│   ├── app/              # Next.js App Router pages
-│   │   ├── page.tsx      # Home page
-│   │   ├── explore/      # Course exploration
-│   │   ├── scholarships/ # Scholarship finder
-│   │   ├── about/        # About page
-│   │   ├── layout.tsx    # Root layout
-│   │   └── globals.css   # Global styles
-│   ├── components/       # Reusable React components
+│   ├── app/                 # Next.js App Router
+│   │   ├── api/            # API routes & auth
+│   │   ├── auth/           # Authentication pages
+│   │   ├── dashboard/      # User dashboard
+│   │   ├── explore/        # Course search
+│   │   ├── course/         # Course detail
+│   │   ├── scholarships/   # Scholarships
+│   │   ├── about/          # About page
+│   │   ├── page.tsx        # Home page
+│   │   ├── layout.tsx      # Root layout
+│   │   ├── robots.ts       # SEO robots
+│   │   └── sitemap.ts      # SEO sitemap
+│   ├── components/         # Reusable components
+│   ├── hooks/              # Custom React hooks
 │   ├── lib/
-│   │   ├── api.ts        # API client functions
-│   │   └── utils.ts      # Utility functions
-│   └── styles/           # CSS files
-├── public/               # Static assets
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-├── next.config.ts
-└── .eslintrc.json
+│   │   ├── auth.ts         # NextAuth config
+│   │   ├── auth-actions.ts # Auth actions
+│   │   ├── api.ts          # API client
+│   │   ├── theme.ts        # Design tokens
+│   │   └── utils.ts        # Utilities
+│   └── styles/             # Global CSS
+├── e2e/                    # Playwright tests
+├── public/                 # Static assets
+├── jest.config.ts          # Jest configuration
+├── playwright.config.ts    # Playwright configuration
+└── [config files]          # TSConfig, Tailwind, ESLint
 ```
 
 ## 🎨 Features
 
-- **🔍 Course Search**: Search and filter courses from multiple platforms
-- **🏆 Scholarship Finder**: Discover funding opportunities
-- **📱 Responsive Design**: Mobile-first, works on all devices
-- **⚡ Performance**: Next.js optimizations, SSG/SSR where needed
-- **♿ Accessibility**: WCAG 2.1 compliant
-- **🎯 Type-Safe**: Full TypeScript support
-- **🎨 Premium UI**: Tailwind CSS with custom color palette
+### ✨ User Features
+- 🔍 **Course Search** - Search and filter courses from multiple platforms
+- 🏆 **Scholarship Finder** - Discover funding opportunities
+- 📚 **Course Details** - Comprehensive course information
+- ❤️ **Wishlist** - Save courses for later
+- 👤 **User Dashboard** - Track learning progress
+- 🔐 **Authentication** - Google/GitHub OAuth sign-in
+
+### 🛠️ Developer Features
+- **Next.js 15** with App Router & TypeScript
+- **Tailwind CSS 3.4** for styling
+- **NextAuth.js** for authentication
+- **Jest + React Testing Library** for unit tests
+- **Playwright** for E2E testing
+- **GitHub Actions** CI/CD pipeline
+- **Accessibility** WCAG 2.1 AA compliance
+- **SEO** robots.txt, sitemap.xml, meta tags
+- **PWA** manifest for mobile apps
 
 ## 🔧 Available Scripts
 
 ```bash
 # Development
-npm run dev
+npm run dev              # Start dev server
 
-# Build for production
-npm run build
+# Build & Deploy
+npm run build           # Build for production
+npm run start           # Start production server
 
-# Start production server
-npm run start
+# Quality
+npm run lint            # Run ESLint
+npm run format          # Format with Prettier
+npm run type-check      # TypeScript check
 
-# Lint code
-npm run lint
-
-# Format code
-npm run format
-
-# Type check
-npm run type-check
+# Testing
+npm test                # Run unit tests
+npm test:watch          # Watch mode
+npm test:e2e            # Run E2E tests
 ```
 
 ## 🎨 Design System
 
 ### Colors
-
 - **Primary**: Sky Blue (`primary-*`)
 - **Secondary**: Purple (`secondary-*`)
 - **Neutral**: Slate (`slate-*`)
 
-### Typography
+### Components
+- Button, Badge, Card, SearchBar
+- Modal, Alert, Pagination
+- Header, Footer, Container
+- SkipLink (accessibility)
 
-- Font: Inter (via Google Fonts)
-- Base size: 16px
-- Line height: 1.5
+### Typography
+- Font: Inter (from Google Fonts)
+- Base size: 16px (1rem)
+- Responsive scales
 
 ## 🔌 API Integration
 
-The frontend communicates with the backend API for:
+### Endpoints
+- `GET /api/courses` - List courses with filters
+- `GET /api/courses/:id` - Get course details
+- `GET /api/scholarships` - List scholarships
+- `POST /api/users/courses` - Enroll in course
+- `POST /api/users/wishlist` - Save course
 
-- Course search and filtering
-- Course details
-- Scholarship listings
-- User authentication (planned)
+### Custom Hooks
+```typescript
+// Data fetching
+const { data, loading, error } = useCourses(filters);
+const course = useCourseDetail(id);
+const { data: scholarships } = useScholarships(filters);
 
-API endpoints are defined in `src/lib/api.ts`.
+// Client storage
+const { value, setValue } = useLocalStorage(key, initial);
+```
+
+## 🔐 Authentication
+
+### Providers
+- **Google OAuth** - Sign in with Google
+- **GitHub OAuth** - Sign in with GitHub
+
+### Protected Routes
+- `/dashboard` - Requires authentication
+- `/dashboard/profile` - User profile
+- `/dashboard/wishlist` - Saved courses
+
+### Session
+```typescript
+import { auth } from "@/lib/auth";
+
+const session = await auth();
+if (session) {
+  // User is authenticated
+  console.log(session.user.email);
+}
+```
 
 ## 📊 Pages
 
 | Route | Description |
 |-------|-------------|
-| `/` | Home page with hero, features, and CTA |
-| `/explore` | Course search and discovery |
+| `/` | Home with features & CTA |
+| `/explore` | Course search & discovery |
+| `/course/:id` | Course details & enrollment |
 | `/scholarships` | Scholarship finder |
 | `/about` | About EduHunt |
-| `/course/:id` | Individual course details (coming soon) |
+| `/auth/signin` | Sign in page |
+| `/auth/error` | Auth error page |
+| `/dashboard` | User learning dashboard |
+| `/dashboard/profile` | User profile settings |
+| `/dashboard/wishlist` | Saved courses |
+
+## 🧪 Testing
+
+### Unit Tests
+```bash
+npm test
+npm test -- --coverage
+```
+
+### E2E Tests
+```bash
+npm run test:e2e
+npm run test:e2e -- --headed
+```
+
+## ♿ Accessibility
+
+- WCAG 2.1 AA compliant
+- Keyboard navigation support
+- ARIA labels and descriptions
+- Color contrast compliance
+- Skip links for screen readers
+- Semantic HTML structure
+
+## 📈 Performance
+
+- Image optimization with Next.js Image
+- Code splitting & lazy loading
+- Server-side rendering (SSR)
+- Static generation (SSG)
+- CSS minification with Tailwind
+- JavaScript bundling optimization
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
 
-1. Push code to GitHub
-2. Import project in [Vercel](https://vercel.com)
-3. Set environment variables
-4. Deploy automatically on push
+1. **Connect repository to Vercel**
+   - Visit [vercel.com](https://vercel.com)
+   - Import the repository
+   - Set project root to `frontend/`
+
+2. **Configure environment variables**
+   - Add all `.env` variables in Vercel settings
+   - Set `NEXTAUTH_URL` to your domain
+
+3. **Deploy**
+   - Automatic deployment on push to main
+   - Preview deployments on pull requests
 
 ### Other Platforms
 
-The app is built with Next.js, so it can be deployed to any Node.js hosting:
-- AWS
-- Google Cloud
-- Netlify
+The app can be deployed to any Node.js hosting:
+- AWS Amplify
+- Google Cloud Run
 - DigitalOcean
 - Heroku
 
 ## 📦 Dependencies
 
 ### Production
-
-- **next**: React framework
-- **react**: UI library
-- **react-dom**: React DOM
-- **tailwindcss**: CSS framework
-- **radix-ui**: Accessible UI primitives
-- **lucide-react**: Icon library
+- `next` - React framework
+- `react` - UI library
+- `next-auth` - Authentication
+- `tailwindcss` - CSS framework
+- `lucide-react` - Icons
 
 ### Development
-
-- **typescript**: Type safety
-- **eslint**: Linting
-- **prettier**: Code formatting
-- **tailwind-merge**: Merge Tailwind classes
+- `typescript` - Type safety
+- `jest` - Unit testing
+- `playwright` - E2E testing
+- `prettier` - Code formatting
+- `eslint` - Linting
 
 ## 🔄 Development Workflow
 
-1. Create feature branch from `main`
-2. Make changes and commit
-3. Run `npm run lint` and `npm run format`
-4. Push and create Pull Request
-5. Get review and merge
+1. Create feature branch
+2. Make changes
+3. Run tests: `npm test`
+4. Run linter: `npm run lint`
+5. Format code: `npm run format`
+6. Push and create PR
+7. Wait for CI/CD to pass
+8. Request review
+
+## 📋 Checklist
+
+- [x] Project scaffolding
+- [x] Core pages (5 main pages)
+- [x] Design system & components (11 components)
+- [x] API integration & hooks
+- [x] Authentication (OAuth)
+- [x] User dashboard
+- [x] Unit tests
+- [x] E2E tests
+- [x] CI/CD pipeline
+- [x] Accessibility
+- [x] SEO setup
+- [x] Deployment ready
+
+## 🤝 Contributing
+
+See root project README for contribution guidelines.
 
 ## 📝 License
 
 Part of the EduHunt project.
 
-## 🤝 Contributing
+## 🎯 Support
 
-See root project README for contribution guidelines.
+- 📧 Email: support@eduhunt.app
+- 🐛 Issues: GitHub Issues
+- 💬 Discussions: GitHub Discussions
+
+---
+
+Built with ❤️ using Next.js & TypeScript
+
