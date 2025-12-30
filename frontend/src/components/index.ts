@@ -9,3 +9,4 @@ export { Container } from "./Container";
 export { Card, CardHeader, CardBody, CardFooter } from "./Card";
 export { Alert } from "./Alert";
 export { Pagination } from "./Pagination";
+export { SkipLink } from "./SkipLink";
