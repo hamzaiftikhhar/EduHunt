@@ -1,0 +1,24 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+  @apply border-border;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-white text-slate-900;
+  font-feature-settings: "rounding-numbers" 1;
+}
+
+a {
+  @apply text-primary-600 underline-offset-4 hover:underline;
+}
+
+button {
+  @apply transition-colors;
+}
