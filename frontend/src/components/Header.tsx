@@ -11,10 +11,7 @@ export function Header() {
         </Link>
 
         <div className="hidden gap-8 md:flex">
-          <Link
-            href="/explore"
-            className="text-slate-600 transition-colors hover:text-primary-600"
-          >
+          <Link href="/explore" className="text-slate-600 transition-colors hover:text-primary-600">
             Explore
           </Link>
           <Link
@@ -23,10 +20,7 @@ export function Header() {
           >
             Scholarships
           </Link>
-          <Link
-            href="/about"
-            className="text-slate-600 transition-colors hover:text-primary-600"
-          >
+          <Link href="/about" className="text-slate-600 transition-colors hover:text-primary-600">
             About
           </Link>
         </div>

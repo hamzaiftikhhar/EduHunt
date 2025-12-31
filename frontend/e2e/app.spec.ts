@@ -19,9 +19,7 @@ test.describe("Home Page", () => {
     await page.goto("http://localhost:3000");
     await page.click('a:has-text("Explore")');
     await expect(page).toHaveURL(/.*explore/);
-    await expect(
-      page.getByRole("heading", { name: /explore courses/i })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: /explore courses/i })).toBeVisible();
   });
 
   test("should display feature cards", async ({ page }) => {
@@ -35,14 +33,12 @@ test.describe("Home Page", () => {
 test.describe("Explore Page", () => {
   test("should display search bar", async ({ page }) => {
     await page.goto("http://localhost:3000/explore");
-    await expect(
-      page.getByPlaceholder("Search courses...")
-    ).toBeVisible();
+    await expect(page.getByPlaceholder("Search courses...")).toBeVisible();
   });
 
   test("should display platform filter", async ({ page }) => {
     await page.goto("http://localhost:3000/explore");
-    const select = page.locator('select');
+    const select = page.locator("select");
     await expect(select).toBeVisible();
   });
 });

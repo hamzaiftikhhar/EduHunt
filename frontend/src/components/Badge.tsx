@@ -20,11 +20,7 @@ const sizeClasses = {
   lg: "px-4 py-2 text-base",
 };
 
-export function Badge({
-  children,
-  variant = "primary",
-  size = "md",
-}: BadgeProps) {
+export function Badge({ children, variant = "primary", size = "md" }: BadgeProps) {
   return (
     <span
       className={`inline-block rounded-full font-medium ${variantClasses[variant]} ${sizeClasses[size]}`}

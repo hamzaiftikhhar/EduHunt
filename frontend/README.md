@@ -86,6 +86,7 @@ frontend/
 ## 🎨 Features
 
 ### ✨ User Features
+
 - 🔍 **Course Search** - Search and filter courses from multiple platforms
 - 🏆 **Scholarship Finder** - Discover funding opportunities
 - 📚 **Course Details** - Comprehensive course information
@@ -94,6 +95,7 @@ frontend/
 - 🔐 **Authentication** - Google/GitHub OAuth sign-in
 
 ### 🛠️ Developer Features
+
 - **Next.js 15** with App Router & TypeScript
 - **Tailwind CSS 3.4** for styling
 - **NextAuth.js** for authentication
@@ -128,17 +130,20 @@ npm test:e2e            # Run E2E tests
 ## 🎨 Design System
 
 ### Colors
+
 - **Primary**: Sky Blue (`primary-*`)
 - **Secondary**: Purple (`secondary-*`)
 - **Neutral**: Slate (`slate-*`)
 
 ### Components
+
 - Button, Badge, Card, SearchBar
 - Modal, Alert, Pagination
 - Header, Footer, Container
 - SkipLink (accessibility)
 
 ### Typography
+
 - Font: Inter (from Google Fonts)
 - Base size: 16px (1rem)
 - Responsive scales
@@ -146,6 +151,7 @@ npm test:e2e            # Run E2E tests
 ## 🔌 API Integration
 
 ### Endpoints
+
 - `GET /api/courses` - List courses with filters
 - `GET /api/courses/:id` - Get course details
 - `GET /api/scholarships` - List scholarships
@@ -153,6 +159,7 @@ npm test:e2e            # Run E2E tests
 - `POST /api/users/wishlist` - Save course
 
 ### Custom Hooks
+
 ```typescript
 // Data fetching
 const { data, loading, error } = useCourses(filters);
@@ -166,15 +173,18 @@ const { value, setValue } = useLocalStorage(key, initial);
 ## 🔐 Authentication
 
 ### Providers
+
 - **Google OAuth** - Sign in with Google
 - **GitHub OAuth** - Sign in with GitHub
 
 ### Protected Routes
+
 - `/dashboard` - Requires authentication
 - `/dashboard/profile` - User profile
 - `/dashboard/wishlist` - Saved courses
 
 ### Session
+
 ```typescript
 import { auth } from "@/lib/auth";
 
@@ -187,28 +197,30 @@ if (session) {
 
 ## 📊 Pages
 
-| Route | Description |
-|-------|-------------|
-| `/` | Home with features & CTA |
-| `/explore` | Course search & discovery |
-| `/course/:id` | Course details & enrollment |
-| `/scholarships` | Scholarship finder |
-| `/about` | About EduHunt |
-| `/auth/signin` | Sign in page |
-| `/auth/error` | Auth error page |
-| `/dashboard` | User learning dashboard |
-| `/dashboard/profile` | User profile settings |
-| `/dashboard/wishlist` | Saved courses |
+| Route                 | Description                 |
+| --------------------- | --------------------------- |
+| `/`                   | Home with features & CTA    |
+| `/explore`            | Course search & discovery   |
+| `/course/:id`         | Course details & enrollment |
+| `/scholarships`       | Scholarship finder          |
+| `/about`              | About EduHunt               |
+| `/auth/signin`        | Sign in page                |
+| `/auth/error`         | Auth error page             |
+| `/dashboard`          | User learning dashboard     |
+| `/dashboard/profile`  | User profile settings       |
+| `/dashboard/wishlist` | Saved courses               |
 
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm test
 npm test -- --coverage
 ```
 
 ### E2E Tests
+
 ```bash
 npm run test:e2e
 npm run test:e2e -- --headed
@@ -252,6 +264,7 @@ npm run test:e2e -- --headed
 ### Other Platforms
 
 The app can be deployed to any Node.js hosting:
+
 - AWS Amplify
 - Google Cloud Run
 - DigitalOcean
@@ -260,6 +273,7 @@ The app can be deployed to any Node.js hosting:
 ## 📦 Dependencies
 
 ### Production
+
 - `next` - React framework
 - `react` - UI library
 - `next-auth` - Authentication
@@ -267,6 +281,7 @@ The app can be deployed to any Node.js hosting:
 - `lucide-react` - Icons
 
 ### Development
+
 - `typescript` - Type safety
 - `jest` - Unit testing
 - `playwright` - E2E testing
@@ -316,4 +331,3 @@ Part of the EduHunt project.
 ---
 
 Built with ❤️ using Next.js & TypeScript
-

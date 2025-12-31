@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -24,7 +22,11 @@ export function Pagination({
       pages.push(1);
       if (currentPage > 3) pages.push("...");
 
-      for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+      for (
+        let i = Math.max(2, currentPage - 1);
+        i <= Math.min(totalPages - 1, currentPage + 1);
+        i++
+      ) {
         pages.push(i);
       }
 
@@ -51,7 +53,7 @@ export function Pagination({
             key={idx}
             onClick={() => typeof page === "number" && onPageChange(page)}
             disabled={page === "..." || loading}
-            className={`px-3 py-2 rounded-lg transition-colors ${
+            className={`rounded-lg px-3 py-2 transition-colors ${
               page === currentPage
                 ? "bg-primary-600 text-white"
                 : page === "..."

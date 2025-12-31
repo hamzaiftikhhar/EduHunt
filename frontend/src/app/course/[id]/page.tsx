@@ -3,19 +3,21 @@
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Clock, Users, BarChart3 } from "lucide-react";
 import { useState } from "react";
+import { use } from "react";
 
 interface CourseDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function CourseDetail({ params }: CourseDetailProps) {
+  const { id } = use(params);
   const [isSaved, setIsSaved] = useState(false);
 
-  // TODO: Fetch course data from API using params.id
+  // TODO: Fetch course data from API using id
   const course = {
-    id: params.id,
+    id: id,
     title: "The Complete JavaScript Course 2024: From Zero to Expert!",
     platform: "Udemy",
     instructor: "Jonas Schmedtmann",
@@ -42,8 +44,7 @@ export default function CourseDetail({ params }: CourseDetailProps) {
       { name: "Projects & Practice", lessons: 20 },
     ],
     url: "https://example.com/course",
-    thumbnail:
-      "https://via.placeholder.com/600x400?text=JavaScript+Course",
+    thumbnail: "https://via.placeholder.com/600x400?text=JavaScript+Course",
   };
 
   return (
@@ -68,7 +69,7 @@ export default function CourseDetail({ params }: CourseDetailProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="space-y-8 lg:col-span-2">
               {/* Thumbnail */}
               <div className="overflow-hidden rounded-lg bg-slate-200">
                 <img
@@ -111,10 +112,10 @@ export default function CourseDetail({ params }: CourseDetailProps) {
                   </div>
                   <div className="rounded-lg border border-slate-200 p-4">
                     <div>
-                      <p className="text-sm font-medium text-slate-900">
-                        ⭐ {course.rating}/5.0
+                      <p className="text-sm font-medium text-slate-900">⭐ {course.rating}/5.0</p>
+                      <p className="text-xs text-slate-500">
+                        {course.reviews.toLocaleString()} reviews
                       </p>
-                      <p className="text-xs text-slate-500">{course.reviews.toLocaleString()} reviews</p>
                     </div>
                   </div>
                 </div>
@@ -125,11 +126,11 @@ export default function CourseDetail({ params }: CourseDetailProps) {
                 <h2 className="mb-4 text-2xl font-bold text-slate-900">About This Course</h2>
                 <p className="mb-6 text-lg text-slate-700">{course.description}</p>
 
-                <h3 className="mb-4 text-xl font-bold text-slate-900">What You'll Learn</h3>
-                <ul className="space-y-3 mb-6">
+                <h3 className="mb-4 text-xl font-bold text-slate-900">What You&apos;ll Learn</h3>
+                <ul className="mb-6 space-y-3">
                   {course.highlights.map((highlight, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="flex-shrink-0 mt-1 h-5 w-5 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-sm font-bold">
+                      <span className="mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-600">
                         ✓
                       </span>
                       <span className="text-slate-700">{highlight}</span>
@@ -163,7 +164,7 @@ export default function CourseDetail({ params }: CourseDetailProps) {
                 {/* Price Card */}
                 <div className="rounded-lg border border-slate-200 bg-white p-6">
                   <p className="mb-4 text-3xl font-bold text-slate-900">{course.price}</p>
-                  <button className="w-full rounded-lg bg-primary-600 py-3 font-semibold text-white transition-all hover:bg-primary-700 mb-3 flex items-center justify-center gap-2">
+                  <button className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 py-3 font-semibold text-white transition-all hover:bg-primary-700">
                     <ExternalLink className="h-5 w-5" />
                     Enroll Now
                   </button>

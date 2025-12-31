@@ -2,10 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-* {
-  @apply border-border;
-}
-
 html {
   @apply scroll-smooth;
 }

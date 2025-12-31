@@ -24,10 +24,7 @@ export default function Home() {
             >
               Scholarships
             </Link>
-            <Link
-              href="/about"
-              className="text-slate-600 transition-colors hover:text-primary-600"
-            >
+            <Link href="/about" className="text-slate-600 transition-colors hover:text-primary-600">
               About
             </Link>
           </div>
@@ -48,8 +45,8 @@ export default function Home() {
               </span>
             </h1>
             <p className="mb-8 text-xl text-slate-600">
-              Explore thousands of courses from the world's best platforms. Find
-              scholarships, free courses, and accelerate your learning journey.
+              Explore thousands of courses from the world&apos;s best platforms. Find scholarships,
+              free courses, and accelerate your learning journey.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link
@@ -86,9 +83,7 @@ export default function Home() {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-slate-900">
-              Why Choose EduHunt?
-            </h2>
+            <h2 className="mb-4 text-4xl font-bold text-slate-900">Why Choose EduHunt?</h2>
             <p className="text-xl text-slate-600">
               Everything you need to find, compare, and enroll in courses
             </p>
@@ -122,9 +117,7 @@ export default function Home() {
                   className="rounded-xl border border-slate-200 p-8 transition-all hover:shadow-lg"
                 >
                   <Icon className="mb-4 h-12 w-12 text-primary-600" />
-                  <h3 className="mb-3 text-xl font-bold text-slate-900">
-                    {feature.title}
-                  </h3>
+                  <h3 className="mb-3 text-xl font-bold text-slate-900">{feature.title}</h3>
                   <p className="text-slate-600">{feature.description}</p>
                 </div>
               );

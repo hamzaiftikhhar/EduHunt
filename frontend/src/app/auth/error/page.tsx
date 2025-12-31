@@ -1,25 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components";
+import { use } from "react";
 
 export default function AuthErrorPage({
   searchParams,
 }: {
-  searchParams: Record<string, string>;
+  searchParams: Promise<Record<string, string>>;
 }) {
-  const error = searchParams.error || "Authentication failed";
+  const params = use(searchParams);
+  const error = params.error || "Authentication failed";
 
   const errorMessages: Record<string, string> = {
-    Callback: "There was a problem with the authentication callback.",
     OAuthSignin: "There was a problem signing in with OAuth.",
     OAuthCallback: "There was a problem with the OAuth callback.",
-    EmailCreateAccount:
-      "Could not create user account with the email provider.",
-    Callback: "There was a problem with the authentication callback.",
+    EmailCreateAccount: "Could not create user account with the email provider.",
     EmailSignInError: "Could not sign in with the email provider.",
-    CredentialsSignin:
-      "Sign in with credentials failed. Check that your details are correct.",
+    CredentialsSignin: "Sign in with credentials failed. Check that your details are correct.",
     SessionCallback: "There was a problem updating your session.",
     default: "An unexpected error occurred during authentication.",
   };
@@ -35,8 +32,7 @@ export default function AuthErrorPage({
           </div>
           <h1 className="mb-2 text-2xl font-bold text-red-900">Authentication Error</h1>
           <p className="text-red-700">
-            {errorMessages[error as keyof typeof errorMessages] ||
-              errorMessages.default}
+            {errorMessages[error as keyof typeof errorMessages] || errorMessages.default}
           </p>
         </div>
 

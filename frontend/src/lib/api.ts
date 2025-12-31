@@ -18,7 +18,6 @@ export async function fetchCourses(filters: CourseFilters = {}) {
     if (filters.limit) params.append("limit", String(filters.limit));
 
     const response = await fetch(`${API_URL}/courses?${params.toString()}`, {
-      cache: "revalidate",
       next: { revalidate: 3600 }, // revalidate every hour
     });
 
@@ -36,7 +35,6 @@ export async function fetchCourses(filters: CourseFilters = {}) {
 export async function fetchCourseById(id: string) {
   try {
     const response = await fetch(`${API_URL}/courses/${id}`, {
-      cache: "revalidate",
       next: { revalidate: 3600 },
     });
 
@@ -67,7 +65,6 @@ export async function fetchScholarships(filters: ScholarshipFilters = {}) {
     if (filters.limit) params.append("limit", String(filters.limit));
 
     const response = await fetch(`${API_URL}/scholarships?${params.toString()}`, {
-      cache: "revalidate",
       next: { revalidate: 3600 },
     });
 

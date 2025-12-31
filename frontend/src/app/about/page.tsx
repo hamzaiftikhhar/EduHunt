@@ -13,7 +13,7 @@ export default function AboutPage() {
 
       {/* Content */}
       <section className="py-12">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="mx-auto max-w-4xl space-y-8 px-4 sm:px-6 lg:px-8">
           <div>
             <h2 className="mb-4 text-3xl font-bold text-slate-900">Our Mission</h2>
             <p className="text-lg text-slate-700">
@@ -28,19 +28,19 @@ export default function AboutPage() {
             <h2 className="mb-4 text-3xl font-bold text-slate-900">What We Do</h2>
             <ul className="space-y-4 text-lg text-slate-700">
               <li className="flex gap-4">
-                <span className="flex-shrink-0 text-primary-600 font-bold">✓</span>
+                <span className="flex-shrink-0 font-bold text-primary-600">✓</span>
                 <span>Aggregate and search thousands of courses from top platforms</span>
               </li>
               <li className="flex gap-4">
-                <span className="flex-shrink-0 text-primary-600 font-bold">✓</span>
+                <span className="flex-shrink-0 font-bold text-primary-600">✓</span>
                 <span>Help you find scholarships and funding opportunities</span>
               </li>
               <li className="flex gap-4">
-                <span className="flex-shrink-0 text-primary-600 font-bold">✓</span>
+                <span className="flex-shrink-0 font-bold text-primary-600">✓</span>
                 <span>Compare courses by ratings, difficulty, and duration</span>
               </li>
               <li className="flex gap-4">
-                <span className="flex-shrink-0 text-primary-600 font-bold">✓</span>
+                <span className="flex-shrink-0 font-bold text-primary-600">✓</span>
                 <span>Save your favorite courses and create learning paths</span>
               </li>
             </ul>
@@ -52,7 +52,15 @@ export default function AboutPage() {
               We currently index courses from these major platforms:
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
-              {["Coursera", "edX", "MIT OpenCourseWare", "Khan Academy", "freeCodeCamp", "YouTube", "Microsoft Learn"].map((platform) => (
+              {[
+                "Coursera",
+                "edX",
+                "MIT OpenCourseWare",
+                "Khan Academy",
+                "freeCodeCamp",
+                "YouTube",
+                "Microsoft Learn",
+              ].map((platform) => (
                 <div
                   key={platform}
                   className="rounded-lg border border-slate-200 p-4 text-center font-medium text-slate-900"
@@ -63,9 +71,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-primary-50 p-8 border border-primary-200">
+          <div className="rounded-lg border border-primary-200 bg-primary-50 p-8">
             <h2 className="mb-4 text-3xl font-bold text-slate-900">Get Started Today</h2>
-            <p className="text-lg text-slate-700 mb-6">
+            <p className="mb-6 text-lg text-slate-700">
               Ready to find your next course or scholarship? Explore our platform and discover
               learning opportunities tailored to your interests and goals.
             </p>

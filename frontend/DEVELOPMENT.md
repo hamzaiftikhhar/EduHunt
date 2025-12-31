@@ -73,6 +73,7 @@ git checkout -b feat/feature-name
 ```
 
 Branch naming conventions:
+
 - `feat/` - New feature
 - `fix/` - Bug fix
 - `docs/` - Documentation
@@ -126,6 +127,7 @@ git push origin feat/feature-name
 ```
 
 Commit message format:
+
 ```
 type(scope): description
 
@@ -145,6 +147,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
    - Screenshots (if UI changes)
 
 Wait for:
+
 - ✅ All checks to pass
 - ✅ Code review approval
 - ✅ Tests to pass
@@ -152,6 +155,7 @@ Wait for:
 ### 6. Merge & Deploy
 
 Maintainer will:
+
 1. Merge PR to main
 2. Delete feature branch
 3. GitHub Actions deploys to production
@@ -278,7 +282,7 @@ import { redirect } from "next/navigation";
 
 export default async function ProtectedPage() {
   const session = await auth();
-  
+
   if (!session) {
     redirect("/auth/signin");
   }
@@ -328,10 +332,7 @@ export async function GET(request: Request) {
     const data = { message: "Hello World" };
     return Response.json(data);
   } catch (error) {
-    return Response.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return Response.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
 ```
@@ -347,9 +348,9 @@ import { useSession } from "next-auth/react";
 
 export default function Component() {
   const { data: session } = useSession();
-  
+
   if (!session) return <div>Not signed in</div>;
-  
+
   return <div>Welcome {session.user.email}</div>;
 }
 ```
@@ -360,9 +361,9 @@ import { auth } from "@/lib/auth";
 
 export default async function Component() {
   const session = await auth();
-  
+
   if (!session) return <div>Not signed in</div>;
-  
+
   return <div>Welcome {session.user.email}</div>;
 }
 ```
@@ -428,9 +429,9 @@ describe("MyComponent", () => {
   it("handles click events", async () => {
     const user = userEvent.setup();
     render(<MyComponent>Click me</MyComponent>);
-    
+
     await user.click(screen.getByRole("button"));
-    
+
     // Assert something changed
   });
 });
@@ -533,6 +534,7 @@ export function Button() {
 ### Keyboard Navigation
 
 Always ensure:
+
 - Tab navigation works
 - Form submissions work with Enter
 - Dialogs have trap focus

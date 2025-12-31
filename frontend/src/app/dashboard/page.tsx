@@ -1,9 +1,10 @@
-import { auth } from "@/lib/auth";
-import { Card, CardHeader, CardBody } from "@/components";
+// import { auth } from "@/lib/auth";
+import { Card } from "@/components";
 import { BookOpen, Clock, Award } from "lucide-react";
 
 export default async function DashboardPage() {
-  const session = await auth();
+  // TODO: Implement proper session retrieval when auth is ready
+  // const session = await auth();
 
   const stats = [
     {
@@ -30,7 +31,7 @@ export default async function DashboardPage() {
     <div className="p-8">
       <div className="mb-8">
         <h1 className="mb-2 text-4xl font-bold text-slate-900">
-          Welcome back, {session?.user?.name || session?.user?.email}!
+          Welcome back, Demo User!
         </h1>
         <p className="text-lg text-slate-600">Track your learning progress here</p>
       </div>
@@ -55,10 +56,10 @@ export default async function DashboardPage() {
 
       {/* Course Progress */}
       <Card>
-        <CardHeader>
+        <div>
           <h2 className="text-2xl font-bold text-slate-900">Your Courses</h2>
-        </CardHeader>
-        <CardBody>
+        </div>
+        <div>
           <div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50">
             <div className="text-center">
               <BookOpen className="mx-auto mb-4 h-12 w-12 text-slate-400" />
@@ -68,7 +69,7 @@ export default async function DashboardPage() {
               </p>
             </div>
           </div>
-        </CardBody>
+        </div>
       </Card>
     </div>
   );

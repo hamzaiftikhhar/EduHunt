@@ -1,18 +1,13 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+// import { auth } from "@/lib/auth";
 import Link from "next/link";
 import { BookOpen, Heart, Settings, LogOut } from "lucide-react";
 
-export default async function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const session = await auth();
-
-  if (!session) {
-    redirect("/auth/signin");
-  }
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  // TODO: Implement proper auth check when backend is ready
+  // const session = await auth();
+  // if (!session) {
+  //   redirect("/auth/signin");
+  // }
 
   return (
     <div className="flex min-h-screen bg-slate-50">
@@ -49,7 +44,7 @@ export default async function DashboardLayout({
         <div className="border-t border-slate-200 px-4 py-6">
           <div className="mb-4 rounded-lg bg-slate-50 p-4">
             <p className="text-xs font-medium uppercase text-slate-600">Signed in as</p>
-            <p className="mt-1 font-medium text-slate-900">{session.user?.email}</p>
+            <p className="mt-1 font-medium text-slate-900">user@eduhunt.app</p>
           </div>
           <form
             action={async () => {

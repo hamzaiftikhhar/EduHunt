@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Search, Filter, Loader } from "lucide-react";
 import { useCourses } from "@/hooks";
 import { CourseCard, Alert } from "@/components";
@@ -70,7 +69,11 @@ export default function ExplorePage() {
                 disabled={loading}
                 className="flex items-center gap-2 rounded-lg bg-primary-600 px-6 py-2 font-semibold text-white transition-all hover:bg-primary-700 disabled:opacity-50"
               >
-                {loading ? <Loader className="h-5 w-5 animate-spin" /> : <Filter className="h-5 w-5" />}
+                {loading ? (
+                  <Loader className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Filter className="h-5 w-5" />
+                )}
                 Search
               </button>
             </div>
@@ -96,9 +99,7 @@ export default function ExplorePage() {
           ) : data?.courses && data.courses.length > 0 ? (
             <>
               <div className="mb-6">
-                <p className="text-sm text-slate-600">
-                  Found {data.total || 0} courses
-                </p>
+                <p className="text-sm text-slate-600">Found {data.total || 0} courses</p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {data.courses.map((course: any) => (

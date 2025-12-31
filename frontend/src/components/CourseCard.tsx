@@ -23,7 +23,7 @@ export function CourseCard({
 }: CourseCardProps) {
   return (
     <Link href={`/course/${id}`}>
-      <div className="h-full rounded-lg border border-slate-200 p-6 transition-all hover:shadow-lg hover:border-primary-300">
+      <div className="h-full rounded-lg border border-slate-200 p-6 transition-all hover:border-primary-300 hover:shadow-lg">
         <h3 className="mb-2 line-clamp-2 font-bold text-slate-900">{title}</h3>
         {instructor && <p className="mb-3 text-sm text-slate-500">by {instructor}</p>}
         <p className="mb-4 line-clamp-2 text-sm text-slate-600">{description}</p>
@@ -39,8 +39,8 @@ export function CourseCard({
         </div>
 
         {level && (
-          <div className="mt-4 pt-4 border-t border-slate-100">
-            <span className="text-xs font-medium text-slate-500 uppercase">{level}</span>
+          <div className="mt-4 border-t border-slate-100 pt-4">
+            <span className="text-xs font-medium uppercase text-slate-500">{level}</span>
           </div>
         )}
       </div>

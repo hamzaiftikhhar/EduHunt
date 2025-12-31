@@ -59,10 +59,7 @@ export function Alert({
           <div className={`${title ? "mt-1" : ""} ${config.text}`}>{children}</div>
         </div>
         {dismissible && (
-          <button
-            onClick={onDismiss}
-            className={`flex-shrink-0 ${config.title} hover:opacity-70`}
-          >
+          <button onClick={onDismiss} className={`flex-shrink-0 ${config.title} hover:opacity-70`}>
             <X className="h-5 w-5" />
           </button>
         )}

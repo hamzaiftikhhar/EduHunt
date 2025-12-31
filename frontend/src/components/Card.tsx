@@ -19,11 +19,7 @@ export function Card({ children, className = "", hoverable = false }: CardProps)
 }
 
 export function CardHeader({ children, className = "" }: CardProps) {
-  return (
-    <div className={`border-b border-slate-200 pb-4 ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`border-b border-slate-200 pb-4 ${className}`}>{children}</div>;
 }
 
 export function CardBody({ children, className = "" }: CardProps) {
@@ -31,9 +27,5 @@ export function CardBody({ children, className = "" }: CardProps) {
 }
 
 export function CardFooter({ children, className = "" }: CardProps) {
-  return (
-    <div className={`border-t border-slate-200 pt-4 ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`border-t border-slate-200 pt-4 ${className}`}>{children}</div>;
 }

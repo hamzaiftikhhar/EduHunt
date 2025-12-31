@@ -47,6 +47,7 @@ Copy the output and paste it as `NEXTAUTH_SECRET` in Vercel.
 ### Step 4: Deploy
 
 Click "Deploy" button. Vercel will:
+
 1. Build the Next.js application
 2. Run tests (if configured)
 3. Deploy to edge network
@@ -166,6 +167,7 @@ npm run type-check # TypeScript check
 ### Logs
 
 View deployment logs:
+
 1. Vercel dashboard > Deployments > Select deployment
 2. Click "Logs" tab
 3. Check for build or runtime errors
@@ -173,6 +175,7 @@ View deployment logs:
 ### Error Tracking
 
 For production errors:
+
 1. Check browser console (F12)
 2. Check Vercel logs
 3. Check backend API logs
@@ -205,6 +208,7 @@ If deployment has issues:
 ### CDN Configuration
 
 Vercel automatically:
+
 - Caches static assets
 - Compresses responses
 - Serves from global edge network
@@ -273,6 +277,7 @@ npm run test:e2e
 ## Support
 
 For deployment issues:
+
 - Check Vercel documentation: https://vercel.com/docs
 - GitHub Actions docs: https://docs.github.com/en/actions
 - NextAuth.js docs: https://next-auth.js.org
